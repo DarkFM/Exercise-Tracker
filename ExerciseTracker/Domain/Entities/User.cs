@@ -9,5 +9,6 @@ namespace ExerciseTracker.Domain.Entities
     {
         public Guid Id { get; set; }
         public string UserName { get; set; }
+        public ICollection<Exercise> Exercises { get; set; }
     }
 }

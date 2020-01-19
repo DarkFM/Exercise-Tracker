@@ -11,5 +11,6 @@ namespace ExerciseTracker.Domain.Entities
         public DateTime Date { get; set; }
         public TimeSpan Duration { get; set; }
         public string Description { get; set; }
+        public Guid UserId { get; set; }
     }
 }
