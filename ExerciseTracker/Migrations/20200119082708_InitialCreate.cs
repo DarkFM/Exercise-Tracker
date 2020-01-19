@@ -24,8 +24,8 @@ namespace ExerciseTracker.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Duration = table.Column<TimeSpan>(nullable: false),
+                    Date = table.Column<long>(nullable: false),
+                    Duration = table.Column<long>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: false)
                 },

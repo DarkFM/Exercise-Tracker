@@ -58,7 +58,7 @@ namespace ExerciseTracker
 
                 endpoints.MapGet("/", async context =>
                 {
-                    context.Response.StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status200OK;
+                    context.Response.StatusCode = StatusCodes.Status200OK;
                     context.Response.ContentType = System.Net.Mime.MediaTypeNames.Text.Html;
                     await context.Response.WriteAsync(File.ReadAllText(env.ContentRootPath + "/Views/index.html"));
                 });

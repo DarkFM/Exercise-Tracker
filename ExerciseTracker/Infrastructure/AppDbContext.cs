@@ -1,4 +1,5 @@
 ﻿using ExerciseTracker.Domain.Entities;
+using ExerciseTracker.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseTracker.Infrastructure
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IUnitOfWork
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -28,6 +29,14 @@ namespace ExerciseTracker.Infrastructure
                 .HasOne<User>()
                 .WithMany(x => x.Exercises)
                 .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<Exercise>()
+                .Property(e => e.Date)
+                .HasConversion<long>();
+
+            modelBuilder.Entity<Exercise>()
+                .Property(e => e.Duration)
+                .HasConversion<long>();
 
             base.OnModelCreating(modelBuilder);
         }

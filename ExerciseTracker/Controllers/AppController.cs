@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 namespace ExerciseTracker.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Route("api/exercise")]
+    public class AppController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<AppController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public AppController(ILogger<AppController> logger)
         {
             _logger = logger;
         }

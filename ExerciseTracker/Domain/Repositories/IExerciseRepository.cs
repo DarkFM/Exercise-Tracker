@@ -8,6 +8,6 @@ namespace ExerciseTracker.Domain.Repositories
 {
     public interface IExerciseRepository : IRepository
     {
-        Task<Exercise> AddAsync(Guid userId, Exercise exercise);
+        Exercise Add(Exercise exercise);
     }
 }
