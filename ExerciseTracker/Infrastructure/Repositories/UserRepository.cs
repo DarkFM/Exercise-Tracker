@@ -19,7 +19,7 @@ namespace ExerciseTracker.Infrastructure.Repositories
 
         public IUnitOfWork UnitOfWork => dbContext;
 
-        public async Task<User> AddUserAsync(User newUser)
+        public User AddUser(User newUser)
         {
             return dbContext.Add(newUser).Entity;
         }

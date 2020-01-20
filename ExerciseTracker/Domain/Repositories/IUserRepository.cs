@@ -8,7 +8,7 @@ namespace ExerciseTracker.Domain.Repositories
 {
     public interface IUserRepository : IRepository
     {
-        Task<User> AddUserAsync(User newUser);
+        User AddUser(User newUser);
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(Guid id);
         Task<User> GetUserByNameAsync(string username);

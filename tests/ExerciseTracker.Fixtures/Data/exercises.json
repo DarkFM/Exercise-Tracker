@@ -1,0 +1,37 @@
+[
+  {
+    "id": "650b762f-b45a-4dd8-8f38-22cd1f1ed34b",
+    "date": "2020-01-15",
+    "duration": "00:15:00",
+    "description": "3 sets, 2 reps of bench pressing",
+    "userid": "f89ffc88-4331-4a56-a861-8ef366e97f55"
+  },
+  {
+    "id": "9f3d1b8c-9e7d-4d1e-8b79-369fe64103a5",
+    "date": "2020-01-17",
+    "duration": "00:25:00",
+    "description": "Go for a run",
+    "userid": "f89ffc88-4331-4a56-a861-8ef366e97f55"
+  },
+  {
+    "id": "7f81db77-e271-4e4c-b407-76cb40c0576e",
+    "date": "2020-01-20",
+    "duration": "00:30:00",
+    "description": "Leg stretches",
+    "userid": "f89ffc88-4331-4a56-a861-8ef366e97f55"
+  },
+  {
+    "id": "9a4c1c07-acd3-4c78-801b-523f6c269b74",
+    "date": "2020-01-10",
+    "duration": "01:30:00",
+    "description": "Go cycling",
+    "userid": "60e50d82-71d4-4630-9e46-c2fe23a2a80d"
+  },
+  {
+    "id": "78a00807-8298-432c-822b-d27ce2c2e70f",
+    "date": "2020-01-17",
+    "duration": "02:15:00",
+    "description": "Rock climbing",
+    "userid": "60e50d82-71d4-4630-9e46-c2fe23a2a80d"
+  }
+]
