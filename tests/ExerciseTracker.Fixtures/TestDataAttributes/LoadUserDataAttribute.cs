@@ -12,9 +12,9 @@ namespace ExerciseTracker.Fixtures.TestDataAttributes
     public class LoadUserDataAttribute : DataAttribute
     {
         private readonly string _filePath;
-        private readonly int _index;
+        private readonly int? _index;
 
-        public LoadUserDataAttribute(int index)
+        public LoadUserDataAttribute(int index = -1)
         {
             _filePath = "./Data/users.json";
             _index = index;
@@ -29,9 +29,13 @@ namespace ExerciseTracker.Fixtures.TestDataAttributes
             var json = File.ReadAllText(_filePath);
 
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var user = JsonSerializer.Deserialize<User[]>(json, options)[_index];
+            var users = JsonSerializer.Deserialize<User[]>(json, options);
 
-            return new List<object[]> { new[] { user } };
+            if (_index == -1)
+                return new List<object[]> { new[] { users } };
+
+            var user = users[_index.Value];
+            return new List<User[]> { new[] { user } };
         }
     }
 }
