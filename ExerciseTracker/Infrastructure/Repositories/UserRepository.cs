@@ -43,25 +43,24 @@ namespace ExerciseTracker.Infrastructure.Repositories
             return await dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> GetUserWithExercisesAsync(Guid id, DateTime from, DateTime to = default)
+        public async Task<User> GetUserWithExercisesAsync(Guid id, DateTime from = default, DateTime to = default)
         {
             if (to == default)
-                to = DateTime.Now.AddDays(10);
+                to = DateTime.UtcNow.AddDays(10);
 
             if (from > to)
                 throw new ArgumentException($"{nameof(from)} cannot be larger than {nameof(to)}");
 
-            return dbContext.Users
-                .Include(u => u.Exercises)
+            return await dbContext.Users
                 .Where(u => u.Id == id)
-                .Select(u => new
+                .Include(u => u.Exercises)
+                .Select(u => new User
                 {
-                    user = u,
-                    exercises = u.Exercises.Where(e => e.Date >= from && e.Date <= to)
+                    Exercises = u.Exercises.Where(e => e.Date >= from && e.Date <= to),
+                    Id = u.Id,
+                    UserName = u.UserName
                 })
-                .ToList()
-                .Select(anon => new User { Id = anon.user.Id, UserName = anon.user.UserName, Exercises = anon.exercises.ToList() })
-                .SingleOrDefault();
+                .SingleOrDefaultAsync();
         }
     }
 }

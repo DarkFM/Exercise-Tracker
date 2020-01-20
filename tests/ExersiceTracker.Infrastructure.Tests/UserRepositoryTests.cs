@@ -14,6 +14,7 @@ namespace ExerciseTracker.Infrastructure.Tests
     {
         private readonly SqliteConnection DbConnection;
         private readonly TestDbContext _dbContext;
+        private readonly UserRepository _sut;
 
         public UserRepositoryTests()
         {
@@ -29,6 +30,7 @@ namespace ExerciseTracker.Infrastructure.Tests
             }
 
             _dbContext = new TestDbContext(contextOptions);
+            _sut = new UserRepository(_dbContext);
         }
 
         [Fact]
@@ -40,9 +42,9 @@ namespace ExerciseTracker.Infrastructure.Tests
                 UserName = "TestUser-Name/\""
             };
 
-            var sut = new UserRepository(_dbContext);
-            sut.AddUser(user);
-            sut.UnitOfWork.SaveChangesAsync().GetAwaiter().GetResult();
+            
+            _sut.AddUser(user);
+            _sut.UnitOfWork.SaveChangesAsync().GetAwaiter().GetResult();
 
             // verify result
             var savedUser = _dbContext.Users.SingleOrDefault(u => u.Id == user.Id);
@@ -54,8 +56,8 @@ namespace ExerciseTracker.Infrastructure.Tests
         [LoadUserData]
         public void Should_return_list_of_all_users(User[] users)
         {
-            var sut = new UserRepository(_dbContext);
-            var storedUsers = sut.GetUsersAsync().GetAwaiter().GetResult();
+            
+            var storedUsers = _sut.GetUsersAsync().GetAwaiter().GetResult();
 
             Assert.NotEmpty(storedUsers);
             foreach (var user in storedUsers)
@@ -68,8 +70,8 @@ namespace ExerciseTracker.Infrastructure.Tests
         [LoadUserData(0)]
         public void Should_return_user_given_the_id(User user)
         {
-            var sut = new UserRepository(_dbContext);
-            var savedUser = sut.GetUserAsync(user.Id).GetAwaiter().GetResult();
+            
+            var savedUser = _sut.GetUserAsync(user.Id).GetAwaiter().GetResult();
             
             Assert.NotNull(savedUser);
             Assert.Equal(user, savedUser, new EntityComparer<User>());
@@ -79,8 +81,8 @@ namespace ExerciseTracker.Infrastructure.Tests
         [LoadUserData(1)]
         public void Should_return_user_given_the_name(User user)
         {
-            var sut = new UserRepository(_dbContext);
-            var savedUser = sut.GetUserByNameAsync(user.UserName).GetAwaiter().GetResult();
+            
+            var savedUser = _sut.GetUserByNameAsync(user.UserName).GetAwaiter().GetResult();
 
             Assert.NotNull(savedUser);
             Assert.Equal(user, savedUser, new EntityComparer<User>());
@@ -90,12 +92,45 @@ namespace ExerciseTracker.Infrastructure.Tests
         [LoadUserData(0)]
         public void Should_return_user_and_the_exercises(User user)
         {
-            var sut = new UserRepository(_dbContext);
-            var savedUser = sut.GetUserWithExercisesAsync(user.Id, new DateTime(2020, 01, 16), new DateTime(2020, 01, 20)).Result;
+            
+            var savedUser = _sut.GetUserWithExercisesAsync(user.Id, new DateTime(2020, 01, 16), new DateTime(2020, 01, 20)).Result;
 
             Assert.NotNull(savedUser);
             Assert.NotEmpty(savedUser.Exercises);
-            Assert.Equal(2, savedUser.Exercises.Count);
+            Assert.Equal(2, savedUser.Exercises.Count());
+        }
+
+        [Theory]
+        [LoadUserData(0)]
+        public void Should_return_user_and_exercises_given_only_from_date_is_given(User user)
+        {
+            var savedUser = _sut.GetUserWithExercisesAsync(user.Id, from: new DateTime(2020, 01, 20)).Result;
+
+            Assert.NotNull(savedUser);
+            Assert.NotEmpty(savedUser.Exercises);
+            Assert.Single(savedUser.Exercises);
+        }
+
+        [Theory]
+        [LoadUserData(0)]
+        public void Should_return_user_and_exercises_given_only_to_date_is_given(User user)
+        {
+            var savedUser = _sut.GetUserWithExercisesAsync(user.Id, to: new DateTime(2020, 01, 17)).Result;
+
+            Assert.NotNull(savedUser);
+            Assert.NotEmpty(savedUser.Exercises);
+            Assert.Equal(2, savedUser.Exercises.Count());
+        }
+
+        [Theory]
+        [LoadUserData(1)]
+        public void Should_return_user_and_exercises_given_no_date_is_given(User user)
+        {
+            var savedUser = _sut.GetUserWithExercisesAsync(user.Id).Result;
+
+            Assert.NotNull(savedUser);
+            Assert.NotEmpty(savedUser.Exercises);
+            Assert.Equal(2, savedUser.Exercises.Count());
         }
 
         public void Dispose()
