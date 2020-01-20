@@ -46,7 +46,7 @@ namespace ExerciseTracker.Infrastructure.Repositories
         public async Task<User> GetUserWithExercisesAsync(Guid id, DateTime from = default, DateTime to = default)
         {
             if (to == default)
-                to = DateTime.UtcNow.AddDays(10);
+                to = DateTime.UtcNow.AddDays(1000);
 
             if (from > to)
                 throw new ArgumentException($"{nameof(from)} cannot be larger than {nameof(to)}");
