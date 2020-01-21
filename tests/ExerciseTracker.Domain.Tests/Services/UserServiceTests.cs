@@ -42,6 +42,16 @@ namespace ExerciseTracker.Domain.Tests.Services
         }
 
         [Theory]
+        [LoadUserData(1)]
+        public void Should_get_user_by_username(User user)
+        {
+            var result = _sut.GetUserByNameAsync(user.UserName).Result;
+
+            Assert.Equal(user.Id, result._id);
+            Assert.Equal(user.UserName, result.Username);
+        }
+
+        [Theory]
         [LoadUserData(0)]
         public void Should_get_all_user_logs(User user)
         {

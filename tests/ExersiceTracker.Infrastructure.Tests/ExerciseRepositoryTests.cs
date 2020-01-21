@@ -1,12 +1,11 @@
 using ExerciseTracker.Domain.Entities;
 using ExerciseTracker.Fixtures;
+using ExerciseTracker.Fixtures.Comparers;
 using ExerciseTracker.Fixtures.Factories;
 using ExerciseTracker.Fixtures.TestDataAttributes;
 using ExerciseTracker.Infrastructure.Repositories;
 using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 

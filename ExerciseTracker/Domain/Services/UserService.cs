@@ -28,6 +28,17 @@ namespace ExerciseTracker.Domain.Services
             return new UserInfoResponse { _id = savedUser.Id, Username = savedUser.UserName };
         }
 
+        public async Task<UserInfoResponse> GetUserByNameAsync(string username)
+        {
+            var user = await repository.GetUserByNameAsync(username);
+
+            return new UserInfoResponse
+            {
+                _id = user.Id,
+                Username = user.UserName
+            };
+        }
+
         public async Task<UserDetailsResponse> GetUserLogsAsync(Guid id, DateTime from = default, DateTime to = default)
         {
             var user = await repository.GetUserWithExercisesAsync(id, from, to);

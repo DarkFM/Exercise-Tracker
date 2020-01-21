@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ExerciseTracker.Infrastructure.Tests
+namespace ExerciseTracker.Fixtures.Comparers
 {
     public class EntityComparer<T> : IEqualityComparer<T>
     {
