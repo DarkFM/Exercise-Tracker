@@ -1,5 +1,6 @@
 ﻿using ExerciseTracker.Domain.Entities;
 using ExerciseTracker.Fixtures;
+using ExerciseTracker.Fixtures.Factories;
 using ExerciseTracker.Fixtures.TestDataAttributes;
 using ExerciseTracker.Infrastructure.Repositories;
 using Microsoft.Data.Sqlite;
@@ -10,26 +11,16 @@ using Xunit;
 
 namespace ExerciseTracker.Infrastructure.Tests
 {
-    public class UserRepositoryTests : IDisposable
+    public class UserRepositoryTests : IClassFixture<TestDbContextFactory>, IDisposable
     {
-        private readonly SqliteConnection DbConnection;
+        private readonly SqliteConnection _dbConnection;
         private readonly TestDbContext _dbContext;
         private readonly UserRepository _sut;
 
-        public UserRepositoryTests()
+        public UserRepositoryTests(TestDbContextFactory factory)
         {
-            DbConnection = new SqliteConnection("DataSource=:memory:");
-            DbConnection.Open();
-            var contextOptions = new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(DbConnection)
-                .Options;
-
-            using (var context = new TestDbContext(contextOptions))
-            {
-                context.Database.EnsureCreated();
-            }
-
-            _dbContext = new TestDbContext(contextOptions);
+            _dbConnection = factory.Connection;
+            _dbContext = factory.DbContextInstance;
             _sut = new UserRepository(_dbContext);
         }
 
@@ -135,7 +126,7 @@ namespace ExerciseTracker.Infrastructure.Tests
 
         public void Dispose()
         {
-            DbConnection.Close();
+            _dbConnection.Close();
         }
     }
 }

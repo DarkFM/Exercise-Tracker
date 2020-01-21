@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using Xunit.Sdk;
 
@@ -12,7 +11,7 @@ namespace ExerciseTracker.Fixtures.TestDataAttributes
     public class LoadUserDataAttribute : DataAttribute
     {
         private readonly string _filePath;
-        private readonly int? _index;
+        private readonly int _index;
 
         public LoadUserDataAttribute(int index = -1)
         {
@@ -34,7 +33,7 @@ namespace ExerciseTracker.Fixtures.TestDataAttributes
             if (_index == -1)
                 return new List<object[]> { new[] { users } };
 
-            var user = users[_index.Value];
+            var user = users[_index];
             return new List<User[]> { new[] { user } };
         }
     }

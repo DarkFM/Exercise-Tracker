@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseTracker.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseTracker.Fixtures", "tests\ExerciseTracker.Fixtures\ExerciseTracker.Fixtures.csproj", "{61BAAE42-C301-4377-9D3C-A8DB8CE58900}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseTracker.Domain.Tests", "tests\ExerciseTracker.Domain.Tests\ExerciseTracker.Domain.Tests.csproj", "{66561104-BA8A-42EF-B6BC-32EE595F4B38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{61BAAE42-C301-4377-9D3C-A8DB8CE58900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BAAE42-C301-4377-9D3C-A8DB8CE58900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BAAE42-C301-4377-9D3C-A8DB8CE58900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66561104-BA8A-42EF-B6BC-32EE595F4B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66561104-BA8A-42EF-B6BC-32EE595F4B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66561104-BA8A-42EF-B6BC-32EE595F4B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66561104-BA8A-42EF-B6BC-32EE595F4B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F9441E30-9EBC-4368-BD8C-EA2851D38687} = {9D01133D-D151-4F23-9452-2B2312932962}
 		{61BAAE42-C301-4377-9D3C-A8DB8CE58900} = {9D01133D-D151-4F23-9452-2B2312932962}
+		{66561104-BA8A-42EF-B6BC-32EE595F4B38} = {9D01133D-D151-4F23-9452-2B2312932962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7B3823-B215-450A-9F2F-1654055EEC73}
