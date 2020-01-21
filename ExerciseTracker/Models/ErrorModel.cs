@@ -16,7 +16,7 @@ namespace ExerciseTracker.Models
 
         public ErrorModel(ActionContext context)
         {
-            Title = "Invalid arguments to the API";
+            Title = "Invalid arguments provided";
             Status = 400;
             Errors = context
                 .ModelState

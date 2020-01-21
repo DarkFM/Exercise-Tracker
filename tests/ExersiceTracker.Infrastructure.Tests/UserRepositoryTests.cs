@@ -84,7 +84,7 @@ namespace ExerciseTracker.Infrastructure.Tests
         public void Should_return_user_and_the_exercises(User user)
         {
             
-            var savedUser = _sut.GetUserWithExercisesAsync(user.Id, new DateTime(2020, 01, 16), new DateTime(2020, 01, 20)).Result;
+            var savedUser = _sut.GetUserWithExercisesAsync(user.Id, from: new DateTime(2020, 01, 16), to: new DateTime(2020, 01, 20)).Result;
 
             Assert.NotNull(savedUser);
             Assert.NotEmpty(savedUser.Exercises);

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ExerciseTracker.Binders;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseTracker.Domain.Requests
@@ -13,6 +16,9 @@ namespace ExerciseTracker.Domain.Requests
 
         [Required]
         public double Duration { get; set; }
+
+        [BindingBehavior(BindingBehavior.Optional)]
+        [BindProperty(BinderType = typeof(CustomDateTimeBinder))]
         public DateTime Date { get; set; } = DateTime.UtcNow;
     }
 }
