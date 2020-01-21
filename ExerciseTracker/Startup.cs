@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ExerciseTracker.Domain.Extensions;
 using ExerciseTracker.Infrastructure;
+using ExerciseTracker.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,11 +33,21 @@ namespace ExerciseTracker
         {
             services.AddControllers();
 
+            services
+                .AddAppServices()
+                .AddRepositories();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult(new Models.ErrorModel(context));
+            });
+
             services.AddCors(setup => 
                 setup.AddDefaultPolicy(policyBldr => 
                     policyBldr.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=appDB.db"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
