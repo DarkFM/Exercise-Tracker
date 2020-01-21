@@ -32,6 +32,9 @@ namespace ExerciseTracker.Domain.Services
         {
             var user = await repository.GetUserByNameAsync(username);
 
+            if (user == null)
+                return null;
+
             return new UserInfoResponse
             {
                 _id = user.Id,
@@ -39,9 +42,13 @@ namespace ExerciseTracker.Domain.Services
             };
         }
 
-        public async Task<UserDetailsResponse> GetUserLogsAsync(Guid id, DateTime from = default, DateTime to = default)
+        public async Task<UserDetailsResponse> GetUserLogsAsync(Guid id, int? limit = null, DateTime from = default, DateTime to = default)
         {
-            var user = await repository.GetUserWithExercisesAsync(id, from, to);
+            var user = await repository.GetUserWithExercisesAsync(id, limit, from, to);
+
+            if (user == null)
+                return null;
+
             return new UserDetailsResponse
             {
                 _id = user.Id,

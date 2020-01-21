@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ExerciseTracker.Domain.Extensions;
+using ExerciseTracker.Filters;
 using ExerciseTracker.Infrastructure;
 using ExerciseTracker.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -31,7 +32,7 @@ namespace ExerciseTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
 
             services
                 .AddAppServices()

@@ -11,6 +11,6 @@ namespace ExerciseTracker.Domain.Services
         Task<UserInfoResponse> AddUserAsync(NewUserRequest request);
         Task<IEnumerable<UserInfoResponse>> GetUsersAsync();
         Task<UserInfoResponse> GetUserByNameAsync(string username);
-        Task<UserDetailsResponse> GetUserLogsAsync(Guid id, DateTime from, DateTime to);
+        Task<UserDetailsResponse> GetUserLogsAsync(Guid id, int? limit, DateTime from, DateTime to);
     }
 }

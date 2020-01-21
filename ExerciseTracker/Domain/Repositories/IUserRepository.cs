@@ -12,6 +12,6 @@ namespace ExerciseTracker.Domain.Repositories
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(Guid id);
         Task<User> GetUserByNameAsync(string username);
-        Task<User> GetUserWithExercisesAsync(Guid id, DateTime from, DateTime to);
+        Task<User> GetUserWithExercisesAsync(Guid id, int? limit, DateTime from, DateTime to);
     }
 }
