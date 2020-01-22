@@ -43,8 +43,8 @@ namespace ExerciseTracker
                 options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult(new Models.ErrorModel(context));
             });
 
-            services.AddCors(setup => 
-                setup.AddDefaultPolicy(policyBldr => 
+            services.AddCors(setup =>
+                setup.AddDefaultPolicy(policyBldr =>
                     policyBldr.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=appDB.db"));
@@ -58,8 +58,6 @@ namespace ExerciseTracker
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

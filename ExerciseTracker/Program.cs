@@ -46,6 +46,8 @@ namespace ExerciseTracker
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    // Using the PORT variable injected by Heroku
+                    webBuilder.UseUrls("http://0.0.0.0:" + Environment.GetEnvironmentVariable("PORT"));
                 });
     }
 }
