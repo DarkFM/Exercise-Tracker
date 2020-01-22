@@ -33,7 +33,7 @@ namespace ExerciseTracker.Controllers
             var user = await _userService.GetUserByNameAsync(request.Username);
             if (user != null)
             {
-                ModelState.AddModelError("", "Username already taken");
+                ModelState.AddModelError(nameof(request.Username).ToLower(), "Username already taken");
                 return BadRequest(ModelState);
             }
             _logger.LogInformation("Adding new user: {userName}", request.Username);

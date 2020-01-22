@@ -7,6 +7,10 @@ namespace ExerciseTracker.Models
 {
     public class ErrorModel
     {
+        private ErrorModel()
+        {
+        }
+
         public ErrorModel(string title, int status, IDictionary<string, string[]> errors)
         {
             Title = title;
@@ -28,7 +32,7 @@ namespace ExerciseTracker.Models
 
         public string Title { get; set; }
         public int Status { get; set; }
-        public IDictionary<string, string[]> Errors { get; }
+        public IDictionary<string, string[]> Errors { get; set; }
 
     }
 }
